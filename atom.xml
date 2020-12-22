@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://taocesc.github.io</id>
+    <title>Tao的博客</title>
+    <updated>2020-12-22T02:27:44.968Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://taocesc.github.io"/>
+    <link rel="self" href="https://taocesc.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://taocesc.github.io/images/avatar.png</logo>
+    <icon>https://taocesc.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, Tao的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[LeetCode题解]]></title>
+        <id>https://taocesc.github.io/post/leetcode-ti-jie/</id>
+        <link href="https://taocesc.github.io/post/leetcode-ti-jie/">
+        </link>
+        <updated>2020-12-22T02:26:28.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="leetcode题解">LeetCode题解</h1>
+<h2 id=""></h2>
+<h2 id="9回文数">9.回文数</h2>
+<h2 id="题目大意">题目大意</h2>
+<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<h2 id="解题思路">解题思路</h2>
+<p>反转一半的数字。</p>
+<h2 id="代码">代码</h2>
+<pre><code class="language-java">class Solution{
+
+    public boolean isPalindrome(int x){
+		#如果小于0，或者末尾为0，则直接返回false
+        if(x&lt;0||(x%10 == 0 &amp;&amp;x!=0)){
+            return false;
+        }
+        int revertedNumber = 0;
+		#当原始x小于或等于反转后的数字时，说明已经到中间循环结束。
+        while(x&gt;revertedNumber){
+            revertedNumber = revertedNumber *10 + x%10;
+            x /= 10;
+        }
+        return x == revertedNumber ||x==revertedNumber/10;
+    }
+}
+</code></pre>
+<h2 id="13罗马数字转整数">13.罗马数字转整数</h2>
+<h2 id="题目大意-2">题目大意</h2>
+<p>给定一个罗马数字，将其转换成整数。</p>
+<h2 id="解题思路-2">解题思路</h2>
+<p>从前往后读字符串，如果在前的字符大于或等于在后的字符，则相加，如果在前的字符小于在后的字符，则减去较小的字符。</p>
+<h2 id="代码-2">代码</h2>
+<pre><code>	java import java.util.*;
+	class Solution {
+
+    public int romanToInt(String s) {
+        int sum = 0;
+        int preNum = getValue(s.charAt(0));
+        for(int i = 1;i &lt; s.length(); i ++) {
+            int num = getValue(s.charAt(i));
+            if(preNum &lt; num) {
+                sum -= preNum;
+            } else {
+                sum += preNum;
+            }
+            preNum = num;
+        }
+        sum += preNum;
+        return sum;
+    }
+    
+    private int getValue(char ch) {
+        switch(ch) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
+}
+
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux配置深度学习环境]]></title>
+        <id>https://taocesc.github.io/post/linux-pei-zhi-shen-du-xue-xi-huan-jing/</id>
+        <link href="https://taocesc.github.io/post/linux-pei-zhi-shen-du-xue-xi-huan-jing/">
+        </link>
+        <updated>2020-12-22T02:26:01.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>本文用以记录Linux系统配置深度学习环境，及未来会碰到的各种问题。
+</code></pre>
+<h2 id="20201125">2020.11.25</h2>
+<p>对于Anaconda的安装，使用离线安装的方式。进入Anaconda官网（<a href="https://www.anaconda.com/products/individual">下载地址</a>）下载Linux版本的离线安装包<strong>Anaconda3-5.3.1---Linux-x86_64.sh</strong>。随后将其复制到Linux对应的目录下。</p>
+<ul>
+<li>
+<p><code>bash Anaconda3-5.3.1-Linux-x86_64.sh</code>，一路yes即可完成安装。</p>
+</li>
+<li>
+<p><code>conda --version</code>可以查看所安装的anaconda的版本信息。</p>
+</li>
+<li>
+<p>创建虚拟环境  <code>conda create -n tf python=3.7</code>，激活conda虚拟环境 <code>conda activate tf</code>。</p>
+</li>
+<li>
+<p>由于国内访问国外的节点速度较慢，所以更换conda源，选择北京外国语大学的镜像站。修改condarc配置文件，<code>vi ~/.condarc</code>打开</p>
+</li>
+</ul>
+<pre><code class="language-python">channels:
+  - defaults
+show_channel_urls: true
+channel_alias: https://mirrors.bfsu.edu.cn/anaconda
+default_channels:
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/main
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/free
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/r
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/pro
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  msys2: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  menpo: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.bfsu.edu.cn/anaconda/cloud
+</code></pre>
+<p><code>:wq</code>退出，运行<code>conda clean -i</code>清除索引缓存，保证用的是镜像站提供的索引。这样我们就把conda源换成国内的镜像，可以显著提高下载的速度。</p>
+<ul>
+<li><strong>安装tensorflow</strong>，我们选择安装gpu版本的tensorflow <code>conda install tensorflow-gpu</code>，末尾不加版本号会自动安装最新版本，在tensorflow2.0以后，安装时会自动下载<code>cudatoolkit</code>和<code>cudnn</code>而不需要我们再手动安装。</li>
+<li><strong>安装pytorch</strong>，<code>conda install pytorch</code>即可完成安装。</li>
+<li>在终端输入<code>python</code>进入python环境，导入tensorflow和pytorch包，不会报错，说明安装成功。</li>
+</ul>
+<pre><code class="language-python">import tensorflow as tf
+import torch
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ARIMA进行时间序列预测-python实现]]></title>
+        <id>https://taocesc.github.io/post/arima-jin-xing-shi-jian-xu-lie-yu-ce-python-shi-xian/</id>
+        <link href="https://taocesc.github.io/post/arima-jin-xing-shi-jian-xu-lie-yu-ce-python-shi-xian/">
+        </link>
+        <updated>2020-12-22T02:25:11.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E7%94%A8arima%E8%BF%9B%E8%A1%8C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B">用ARIMA进行时间序列预测</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97">什么是时间序列？</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%B9%B3%E7%A8%B3%E6%80%A7">时间序列的平稳性</a></li>
+<li><a href="#%E4%BD%BF%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%B9%B3%E7%A8%B3">使一个时间序列平稳？</a></li>
+<li><a href="#%E9%A2%84%E6%B5%8B%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97">预测一个时间序列</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+</ul>
+</li>
+</ul>
+(ARIMA进行时间序列预测)</p>
+<h1 id="用arima进行时间序列预测">用ARIMA进行时间序列预测</h1>
+<p>本文翻译于Kaggle，原文链接<a href="https://www.kaggle.com/kanncaa1/time-series-prediction-tutorial-with-eda">时间序列预测教程</a>。中文论坛很少有对整个过程进行描述，所以想转载过来供大家一起学习。数据在原文也有，我也放了云盘<a href="https://wws.lanzous.com/iM2sPfq85rg">天气数据</a>。<br>
+英文水平和学术水平都比较低，所以翻译问题和理论问题在所难免，如果不能理解，请查看原文。</p>
+<ul>
+<li>我们将使用最常见的方法ARIMA</li>
+<li>ARIMA：差分整合移动平均自回归模型。我将在下一部分详细解释。</li>
+<li>接下来我们会看到：
+<ul>
+<li>什么是时间序列（Time Series）？</li>
+<li>时间序列的平稳性（Stationarity )</li>
+<li>使一个时间序列平稳？</li>
+<li>预测一个时间序列</li>
+</ul>
+</li>
+</ul>
+<h2 id="什么是时间序列">什么是时间序列？</h2>
+<ul>
+<li>时间序列是以国定的时间间隔收集的数据点的集合。</li>
+<li>它依赖于时间。</li>
+<li>大多数的时间序列都有某种形式的<strong>季节性趋势</strong>。例如，如果我们销售冰淇淋，很可能在夏季会有更高的销售额。因此，该事件序列具有季节性趋势。</li>
+<li>再举一个例子，假如我们在一年内每天投掷一次骰子。正如你想的那样，不会出现数字6主要出现在夏季或者数字5出现在1月份这样的情景。因此，该时间序列不具有季节性趋势。</li>
+</ul>
+<h2 id="时间序列的平稳性">时间序列的平稳性</h2>
+<ul>
+<li>一个时间序列是平稳序列还是非平稳序列，有三个基本的判断标准。
+<ul>
+<li>时间序列的统计特征比如均值、方差应随时间保持恒定，<strong>那么我们说这个时间序列是平稳的</strong>。
+<ul>
+<li>常数平均值（constant mean）</li>
+<li>常数方差（constant variance）</li>
+<li>不依赖于时间的自协方差。自协方差是指时间序列与滞后时间序列之间的协方差。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python"># Mean temperature of Bindikuri area
+plt.figure(figsize=(22,10))
+plt.plot(weather_bin.Date,weather_bin.MeanTemp)
+plt.title(&quot;Mean Temperature of Bindukuri Area&quot;)
+plt.xlabel(&quot;Date&quot;)
+plt.ylabel(&quot;Mean Temperature&quot;)
+plt.show()
+
+# lets create time series from weather 
+timeSeries = weather_bin.loc[:, [&quot;Date&quot;,&quot;MeanTemp&quot;]]
+timeSeries.index = timeSeries.Date
+ts = timeSeries.drop(&quot;Date&quot;,axis=1)
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20200817165225422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>从上面的图中可以看出，我们的时间序列具有季节性变化。每年夏季平均气温较高，冬季平均气温较低。</li>
+<li>现在我们来检验一下时间序列的平稳性。我们可以用以下方法检验平稳性:
+<ul>
+<li>绘制滚动数据：我们有一个窗口假设窗口大小为6然后通过滚动均值和方差来检验是否平稳。</li>
+<li>迪基-福勒检验（Dickey-Fuller Test）：测试结果包括一个<strong>测试统计量</strong>和一些差异置信水平的<strong>临界值</strong>。如果<strong>检验统计量</strong>小于<strong>临界值</strong>，我们可以说时间序列是平稳的。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python"># adfuller library 
+from statsmodels.tsa.stattools import adfuller
+# check_adfuller
+def check_adfuller(ts):
+    # Dickey-Fuller test
+    result = adfuller(ts, autolag='AIC')
+    print('Test statistic: ' , result[0])
+    print('p-value: '  ,result[1])
+    print('Critical Values:' ,result[4])
+# check_mean_std
+def check_mean_std(ts):
+    #Rolling statistics
+    rolmean = pd.rolling_mean(ts, window=6)
+    rolstd = pd.rolling_std(ts, window=6)
+    plt.figure(figsize=(22,10))   
+    orig = plt.plot(ts, color='red',label='Original')
+    mean = plt.plot(rolmean, color='black', label='Rolling Mean')
+    std = plt.plot(rolstd, color='green', label = 'Rolling Std')
+    plt.xlabel(&quot;Date&quot;)
+    plt.ylabel(&quot;Mean Temperature&quot;)
+    plt.title('Rolling Mean &amp; Standard Deviation')
+    plt.legend()
+    plt.show()
+    
+# check stationary: mean, variance(std)and adfuller test
+check_mean_std(ts)
+check_adfuller(ts.MeanTemp)
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/202008171657006.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-python">Test statistic:  -1.409596674588769
+p-value:  0.5776668028526388
+Critical Values: {'1%': -3.439229783394421, '5%': -2.86545894814762, '10%': -2.5688568756191392}
+</code></pre>
+<ul>
+<li>平稳的第一个标准是常数均值。因为平均值不是恒定的所以它不是平稳序列。你可以从上面的图（黑线）中看到。</li>
+<li>第二个是常数方差。它看起来像是一个常数。</li>
+<li>第三，如果检验统计量小于临界值，我们可以说时间序列是平稳的。我们来看一看：
+<ul>
+<li>test statistic = -1.4 and critical values = {'1%': -3.439229783394421, '5%': -2.86545894814762, '10%': -2.5688568756191392}.检验统计值大于临界值。（no stationary)</li>
+</ul>
+</li>
+<li>因此，我们确信我们的时间序列不是平稳的。</li>
+<li>接下来让我们把时间序列变得平稳。</li>
+</ul>
+<h2 id="使一个时间序列平稳">使一个时间序列平稳？</h2>
+<ul>
+<li>如前文所述，时间序列的非平稳性有两个原因：
+<ul>
+<li>趋势（Trend）:随时间变化的平均值。对于平稳的时间序列，我们需要常数均值。</li>
+<li>季节性（Seasonality）:在特定时间发生变化。我们需要常数变化来表示时间序列的平稳。</li>
+</ul>
+</li>
+<li>首先解决趋势（常数均值）的问题
+<ul>
+<li>最常用的方法是移动平均线。
+<ul>
+<li>移动平均（Moving average）:我们有一个窗口，取过去n个样本的平均值。'n'是窗口大小。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python"># Moving average method
+window_size = 6
+moving_avg = pd.rolling_mean(ts,window_size)
+plt.figure(figsize=(22,10))
+plt.plot(ts, color = &quot;red&quot;,label = &quot;Original&quot;)
+plt.plot(moving_avg, color='black', label = &quot;moving_avg_mean&quot;)
+plt.title(&quot;Mean Temperature of Bindukuri Area&quot;)
+plt.xlabel(&quot;Date&quot;)
+plt.ylabel(&quot;Mean Temperature&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200817170635772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-python">ts_moving_avg_diff = ts - moving_avg
+ts_moving_avg_diff.dropna(inplace=True) # first 6 is nan value due to window size
+
+# check stationary: mean, variance(std)and adfuller test
+check_mean_std(ts_moving_avg_diff)
+check_adfuller(ts_moving_avg_diff.MeanTemp)
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20200817170659713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-python">Test statistic:  -11.138514335138474
+p-value:  3.150868563164652e-20
+Critical Values: {'1%': -3.4392539652094154, '5%': -2.86546960465041, '10%': -2.5688625527782327}
+</code></pre>
+<ul>
+<li>常数平均标准:平均值看起来像常数，你可以从上面的图(黑线)中看到。</li>
+<li>第二个是常数方差。它看起来像个常数。</li>
+<li>检验统计量小于1%的临界值所以我们可以说有99%的信心说这是一个平稳序列。</li>
+<li>这样我们可以得到一个平稳时间序列。然后让我们一下另一种避免趋势和季节性的方法。
+<ul>
+<li>差分法（Diffrencing method）:是最常用的方法之一。方法是在时间序列和<strong>移位</strong>（<strong>shifted</strong>）的时间序列之间取差。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python"># differencing method
+ts_diff = ts - ts.shift()
+plt.figure(figsize=(22,10))
+plt.plot(ts_diff)
+plt.title(&quot;Differencing method&quot;) 
+plt.xlabel(&quot;Date&quot;)
+plt.ylabel(&quot;Differencing Mean Temperature&quot;)
+plt.show()
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200817171235711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-python">ts_diff.dropna(inplace=True) # due to shifting there is nan values
+# check stationary: mean, variance(std)and adfuller test
+check_mean_std(ts_diff)
+check_adfuller(ts_diff.MeanTemp)
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://img-blog.csdnimg.cn/20200817171301144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-python">Test statistic:  -11.678955575105382
+p-value:  1.7602075693558453e-21
+Critical Values: {'1%': -3.439229783394421, '5%': -2.86545894814762, '10%': -2.5688568756191392}
+</code></pre>
+<ul>
+<li>常数平均标准:平均值看起来像常数，你可以从上面的图(黑线)中看到。</li>
+<li>第二个是常数方差。它看起来像个常数。</li>
+<li>检验统计量小于1%的临界值所以我们可以说有99%的信心说这是一个平稳序列。</li>
+</ul>
+<h2 id="预测一个时间序列">预测一个时间序列</h2>
+<ul>
+<li>我们学习了两种不同的方法，即<strong>移动平均</strong>和<strong>差分法</strong>来避免趋势和季节性问题。</li>
+<li>对于预测(prediction、forecasting），我们将使用<em>ts_diff</em>时间序列，它是差分法的结果。</li>
+<li><em><strong>预测方法为ARIMA。</strong></em>
+<ul>
+<li>AR：auto-Regressive（p）：AR项是因变量的滞后。举个例子p = 3，我们将用x(t-1),x(t-2),x(t-3)来预测x(t)</li>
+<li>I:Intergraed(d): 这些事非季节性差异的数目。举个例子，在这里我们取一阶差分。所以我们传递这个变量并让d = 0</li>
+<li>MA：Moving Averages(q)：MA项是预测方程中的滞后预测误差。</li>
+</ul>
+</li>
+<li>(p,d,q)是ARIMA模型的三个参数。</li>
+<li>为了确定p,d,q三个参数的值，我们将使用两个不痛的图。
+<ul>
+<li>自相关函数 (ACF):时间序列与滞后时间序列之间相关性的度量。</li>
+<li>部分自相关函数(PACF):</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python"># ACF and PACF 
+from statsmodels.tsa.stattools import acf, pacf
+lag_acf = acf(ts_diff, nlags=20)
+lag_pacf = pacf(ts_diff, nlags=20, method='ols')
+# ACF
+plt.figure(figsize=(22,10))
+
+plt.subplot(121) 
+plt.plot(lag_acf)
+plt.axhline(y=0,linestyle='--',color='gray')
+plt.axhline(y=-1.96/np.sqrt(len(ts_diff)),linestyle='--',color='gray')
+plt.axhline(y=1.96/np.sqrt(len(ts_diff)),linestyle='--',color='gray')
+plt.title('Autocorrelation Function')
+
+# PACF
+plt.subplot(122)
+plt.plot(lag_pacf)
+plt.axhline(y=0,linestyle='--',color='gray')
+plt.axhline(y=-1.96/np.sqrt(len(ts_diff)),linestyle='--',color='gray')
+plt.axhline(y=1.96/np.sqrt(len(ts_diff)),linestyle='--',color='gray')
+plt.title('Partial Autocorrelation Function')
+plt.tight_layout()
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://img-blog.csdnimg.cn/20200817172822571.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>两条虚线是置信区间。我们使用这些线来确定p和q的值
+<ul>
+<li>p: PACF图第一次跨越上置信区间时的滞后值。p = 1。</li>
+<li>q: ACF图第一次跨越上置信区间时的滞后值。q = 1。</li>
+</ul>
+</li>
+<li>现在使用（1，0，1）作为ARIMA模型的三个参数并进行预测
+<ul>
+<li>ARIMA：来自statsmodels库</li>
+<li>datetime: 我们将使用它作为预测方法的起始和结束指标</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python"># ARIMA LİBRARY
+from statsmodels.tsa.arima_model import ARIMA
+from pandas import datetime
+
+# fit model
+model = ARIMA(ts, order=(1,0,1)) # (ARMA) = (1,0,1)
+model_fit = model.fit(disp=0)
+
+# predict
+start_index = datetime(1944, 6, 25)
+end_index = datetime(1945, 5, 31)
+forecast = model_fit.predict(start=start_index, end=end_index)
+
+# visualization
+plt.figure(figsize=(22,10))
+plt.plot(weather_bin.Date,weather_bin.MeanTemp,label = &quot;original&quot;)
+plt.plot(forecast,label = &quot;predicted&quot;)
+plt.title(&quot;Time Series Forecast&quot;)
+plt.xlabel(&quot;Date&quot;)
+plt.ylabel(&quot;Mean Temperature&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/2020081717324012.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-python"># predict all path
+from sklearn.metrics import mean_squared_error
+# fit model
+model2 = ARIMA(ts, order=(1,0,1)) # (ARMA) = (1,0,1)
+model_fit2 = model2.fit(disp=0)
+forecast2 = model_fit2.predict()
+error = mean_squared_error(ts, forecast2)
+print(&quot;error: &quot; ,error)
+# visualization
+plt.figure(figsize=(22,10))
+plt.plot(weather_bin.Date,weather_bin.MeanTemp,label = &quot;original&quot;)
+plt.plot(forecast2,label = &quot;predicted&quot;)
+plt.title(&quot;Time Series Forecast&quot;)
+plt.xlabel(&quot;Date&quot;)
+plt.ylabel(&quot;Mean Temperature&quot;)
+plt.legend()
+plt.savefig('graph.png')
+
+plt.show()
+</code></pre>
+<pre><code class="language-python">error:  1.8625819952314109
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/20200817173335293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODgwMzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="结论">结论</h2>
+<ul>
+<li>我们学习如何用pyplot绘制地图。</li>
+<li>我们学习如何进行时间序列预测。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://taocesc.github.io/post/hello-gridea/</id>
+        <link href="https://taocesc.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>

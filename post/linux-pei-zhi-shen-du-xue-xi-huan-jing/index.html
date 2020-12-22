@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Linux配置深度学习环境 | Tao的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://taocesc.github.io/favicon.ico?v=1608604037817">
+<link rel="stylesheet" href="https://taocesc.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="本文用以记录Linux系统配置深度学习环境，及未来会碰到的各种问题。
+
+2020.11.25
+对于Anaconda的安装，使用离线安装的方式。进入Anaconda官网（下载地址）下载Linux版本的离线安装包Anaconda3-5.3.1-..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://taocesc.github.io">
+        <img src="https://taocesc.github.io/images/avatar.png?v=1608604037817" class="site-logo">
+        <h1 class="site-title">Tao的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://taocesc.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Linux配置深度学习环境</h2>
+            <div class="post-date">2020-12-22</div>
+            
+            <div class="post-content" v-pre>
+              <pre><code>本文用以记录Linux系统配置深度学习环境，及未来会碰到的各种问题。
+</code></pre>
+<h2 id="20201125">2020.11.25</h2>
+<p>对于Anaconda的安装，使用离线安装的方式。进入Anaconda官网（<a href="https://www.anaconda.com/products/individual">下载地址</a>）下载Linux版本的离线安装包<strong>Anaconda3-5.3.1---Linux-x86_64.sh</strong>。随后将其复制到Linux对应的目录下。</p>
+<ul>
+<li>
+<p><code>bash Anaconda3-5.3.1-Linux-x86_64.sh</code>，一路yes即可完成安装。</p>
+</li>
+<li>
+<p><code>conda --version</code>可以查看所安装的anaconda的版本信息。</p>
+</li>
+<li>
+<p>创建虚拟环境  <code>conda create -n tf python=3.7</code>，激活conda虚拟环境 <code>conda activate tf</code>。</p>
+</li>
+<li>
+<p>由于国内访问国外的节点速度较慢，所以更换conda源，选择北京外国语大学的镜像站。修改condarc配置文件，<code>vi ~/.condarc</code>打开</p>
+</li>
+</ul>
+<pre><code class="language-python">channels:
+  - defaults
+show_channel_urls: true
+channel_alias: https://mirrors.bfsu.edu.cn/anaconda
+default_channels:
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/main
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/free
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/r
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/pro
+  - https://mirrors.bfsu.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  msys2: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  menpo: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.bfsu.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.bfsu.edu.cn/anaconda/cloud
+</code></pre>
+<p><code>:wq</code>退出，运行<code>conda clean -i</code>清除索引缓存，保证用的是镜像站提供的索引。这样我们就把conda源换成国内的镜像，可以显著提高下载的速度。</p>
+<ul>
+<li><strong>安装tensorflow</strong>，我们选择安装gpu版本的tensorflow <code>conda install tensorflow-gpu</code>，末尾不加版本号会自动安装最新版本，在tensorflow2.0以后，安装时会自动下载<code>cudatoolkit</code>和<code>cudnn</code>而不需要我们再手动安装。</li>
+<li><strong>安装pytorch</strong>，<code>conda install pytorch</code>即可完成安装。</li>
+<li>在终端输入<code>python</code>进入python环境，导入tensorflow和pytorch包，不会报错，说明安装成功。</li>
+</ul>
+<pre><code class="language-python">import tensorflow as tf
+import torch
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://taocesc.github.io/post/arima-jin-xing-shi-jian-xu-lie-yu-ce-python-shi-xian/">
+                  <h3 class="post-title">
+                    ARIMA进行时间序列预测-python实现
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
