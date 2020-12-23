@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://taocesc.github.io</id>
     <title>Tao的博客</title>
-    <updated>2020-12-22T02:29:17.140Z</updated>
+    <updated>2020-12-23T02:14:45.099Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://taocesc.github.io"/>
     <link rel="self" href="https://taocesc.github.io/atom.xml"/>
@@ -11,12 +11,25 @@
     <icon>https://taocesc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tao的博客</rights>
     <entry>
-        <title type="html"><![CDATA[111]]></title>
+        <title type="html"><![CDATA[数据处理]]></title>
         <id>https://taocesc.github.io/post/111/</id>
         <link href="https://taocesc.github.io/post/111/">
         </link>
         <updated>2020-12-22T02:29:09.000Z</updated>
-        <content type="html"><![CDATA[<p>111</p>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#1%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">1.数据预处理</a>
+<ul>
+<li><a href="#11-z-score%E5%87%BD%E6%95%B0%E6%A0%87%E5%87%86%E5%8C%96">1.1 Z-score函数标准化</a></li>
+<li><a href="#12-log%E5%87%BD%E6%95%B0%E6%A0%87%E5%87%86%E5%8C%96">1.2 Log函数标准化</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h1 id="1数据预处理">1.数据预处理</h1>
+<h2 id="11-z-score函数标准化">1.1 Z-score函数标准化</h2>
+<p>Z-score标准化不合适，原因在于Z-score标准化对数据的放缩是不均匀的。以均值为0的数据来说，当标准差大于1时，绝对值越大的数据被放缩的幅度越大；当标准差小于1时，绝对值越大的数据被放缩的幅度则越小。在评估股票数据趋势时，涨幅、跌幅是一个非常重要的参考。在经过Z-score标准化处理后，股票数据<strong>原本的涨幅和跌幅将会发生改变</strong>，这会在我们的数据处理过程中产生额外的计算。</p>
+<h2 id="12-log函数标准化">1.2 Log函数标准化</h2>
+<p>股价数据的差距并不会达到好几个数量级。使用Log函数进行标准化会使得大量在同一数量级的数据在标准化后数值<strong>过于接近而难以区分</strong>，从而丧失了这些数据原有的特征，并不利于后续的处理。</p>
 ]]></content>
     </entry>
     <entry>
@@ -91,6 +104,12 @@
 
 
 </code></pre>
+<h2 id="14最长公共前缀">14.最长公共前缀</h2>
+<h2 id="题目大意-3">题目大意</h2>
+<p>查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回</p>
+<h2 id="解题思路-3">解题思路</h2>
+<p>从前往后读字符串，如果在前的字符大于或等于在后的字符，则相加，如果在前的字符小于在后的字符，则减去较小的字符。</p>
+<h2 id="代码-3">代码</h2>
 ]]></content>
     </entry>
     <entry>

@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" >
 
-<title>111 | Tao的博客</title>
+<title>数据处理 | Tao的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://taocesc.github.io/favicon.ico?v=1608604151842">
+<link rel="shortcut icon" href="https://taocesc.github.io/favicon.ico?v=1608689679985">
 <link rel="stylesheet" href="https://taocesc.github.io/styles/main.css">
 
 
@@ -18,8 +18,18 @@
 
 
 
-    <meta name="description" content="111
-" />
+    <meta name="description" content="
+1.数据预处理
+
+1.1 Z-score函数标准化
+1.2 Log函数标准化
+
+
+
+
+1.数据预处理
+1.1 Z-score函数标准化
+Z-score标准化不合适，原因在于Z-score标准化对数据的放缩是不均匀的。以均值为0的数据来说，..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -29,7 +39,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://taocesc.github.io">
-        <img src="https://taocesc.github.io/images/avatar.png?v=1608604151842" class="site-logo">
+        <img src="https://taocesc.github.io/images/avatar.png?v=1608689679985" class="site-logo">
         <h1 class="site-title">Tao的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -91,11 +101,24 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">111</h2>
+            <h2 class="post-title">数据处理</h2>
             <div class="post-date">2020-12-22</div>
             
             <div class="post-content" v-pre>
-              <p>111</p>
+              <p><ul class="markdownIt-TOC">
+<li><a href="#1%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">1.数据预处理</a>
+<ul>
+<li><a href="#11-z-score%E5%87%BD%E6%95%B0%E6%A0%87%E5%87%86%E5%8C%96">1.1 Z-score函数标准化</a></li>
+<li><a href="#12-log%E5%87%BD%E6%95%B0%E6%A0%87%E5%87%86%E5%8C%96">1.2 Log函数标准化</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h1 id="1数据预处理">1.数据预处理</h1>
+<h2 id="11-z-score函数标准化">1.1 Z-score函数标准化</h2>
+<p>Z-score标准化不合适，原因在于Z-score标准化对数据的放缩是不均匀的。以均值为0的数据来说，当标准差大于1时，绝对值越大的数据被放缩的幅度越大；当标准差小于1时，绝对值越大的数据被放缩的幅度则越小。在评估股票数据趋势时，涨幅、跌幅是一个非常重要的参考。在经过Z-score标准化处理后，股票数据<strong>原本的涨幅和跌幅将会发生改变</strong>，这会在我们的数据处理过程中产生额外的计算。</p>
+<h2 id="12-log函数标准化">1.2 Log函数标准化</h2>
+<p>股价数据的差距并不会达到好几个数量级。使用Log函数进行标准化会使得大量在同一数量级的数据在标准化后数值<strong>过于接近而难以区分</strong>，从而丧失了这些数据原有的特征，并不利于后续的处理。</p>
 
             </div>
             
