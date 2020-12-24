@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://taocesc.github.io</id>
     <title>Tao的博客</title>
-    <updated>2020-12-23T07:22:42.109Z</updated>
+    <updated>2020-12-24T01:16:18.034Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://taocesc.github.io"/>
     <link rel="self" href="https://taocesc.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://taocesc.github.io/images/avatar.png</logo>
     <icon>https://taocesc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tao的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[随笔]]></title>
+        <id>https://taocesc.github.io/post/sui-bi/</id>
+        <link href="https://taocesc.github.io/post/sui-bi/">
+        </link>
+        <updated>2020-12-23T14:33:13.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="20201223晚">2020.12.23晚</h1>
+<p><strong>Java Stack 类</strong><br>
+boolean empty() 判断栈是否为空</p>
+<p>Object peek()  查看栈顶元素<br>
+Object pop()    移除栈顶元素<br>
+Object push() 把元素压入栈顶部<br>
+int search(Object element) 返回元素在栈中的位置。<br>
+用法：</p>
+<pre><code class="language-java">public void test(int x){
+    Stack&lt;Integer&gt; s1 = new Stack&lt;Integer&gt;();
+    Stack&lt;Integer&gt; s2 = new Stack&lt;Integer&gt;();
+    s1.push(x);
+    s2.push(x);
+    int p1 = s1.peek();
+    int p2 = s2.peek();
+
+}
+</code></pre>
+<p><strong>toCharArray()方法将字符串转换成字符数组。</strong></p>
+<pre><code class="language-java">public char[ ] toCharArray()
+</code></pre>
+<p>链表：Linkedlist<br>
+Java LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器。<br>
+与 ArrayList 相比，LinkedList 的<strong>增加和删除</strong>对操作效率更高，而<strong>查找和修改</strong>的操作效率较低。</p>
+<p><strong>以下情况使用ArrayList：</strong></p>
+<ul>
+<li>频繁访问列表中的某一个元素</li>
+<li>只需要在列表末尾进行添加和删除元素操作。</li>
+</ul>
+<p><strong>以下情况使用LinkedList:</strong></p>
+<ul>
+<li>需要通过循环迭代来访问列表中的某些元素。</li>
+<li>需要频繁的在列表开头、中间、等位置进行添加和删除元素操作。</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Tensorflow文档]]></title>
         <id>https://taocesc.github.io/post/11/</id>
@@ -217,11 +259,14 @@ sgd = optimizers.SGD(lr=0.01, clipnorm=1.)
 
 
 </code></pre>
-<h2 id="14最长公共前缀">14.最长公共前缀</h2>
+<h2 id="20有效的括号">20.有效的括号</h2>
 <h2 id="题目大意-3">题目大意</h2>
-<p>查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回</p>
+<p>给定一个只包括括号的字符串，判断字符串是否有效。</p>
+<ul>
+<li>左括号必须用相同类型的右括号闭合。</li>
+<li>左括号必须以正确的顺序闭合。</li>
+</ul>
 <h2 id="解题思路-3">解题思路</h2>
-<p>从前往后读字符串，如果在前的字符大于或等于在后的字符，则相加，如果在前的字符小于在后的字符，则减去较小的字符。</p>
 <h2 id="代码-3">代码</h2>
 ]]></content>
     </entry>
