@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://taocesc.github.io</id>
     <title>Tao的博客</title>
-    <updated>2020-12-28T12:27:02.165Z</updated>
+    <updated>2020-12-28T12:53:54.686Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://taocesc.github.io"/>
     <link rel="self" href="https://taocesc.github.io/atom.xml"/>
@@ -10,18 +10,6 @@
     <logo>https://taocesc.github.io/images/avatar.png</logo>
     <icon>https://taocesc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tao的博客</rights>
-    <entry>
-        <title type="html"><![CDATA[2020年终总结]]></title>
-        <id>https://taocesc.github.io/post/2020-nian-zhong-zong-jie/</id>
-        <link href="https://taocesc.github.io/post/2020-nian-zhong-zong-jie/">
-        </link>
-        <updated>2020-12-28T12:17:24.000Z</updated>
-        <content type="html"><![CDATA[<p><font color=#999AAA >写在前面：2020年即将过去，这一年的确是不太平凡，对于自己来说，也算是一个全新的开始吧。</p>
-<ul>
-<li>还得从20年的年初开始算起，那一天离开了住了半年的出租屋，给自己的第二次考研初试画上了一个句号。回到家中没过多久，就遇到了这一次疫情，直至今日，我们还在被影响着。也是因为疫情，考研复试破天荒的变成了网络复试。</li>
-</ul>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[随笔]]></title>
         <id>https://taocesc.github.io/post/sui-bi/</id>
