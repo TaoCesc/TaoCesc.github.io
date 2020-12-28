@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://taocesc.github.io/favicon.ico?v=1608772575279">
+<link rel="shortcut icon" href="https://taocesc.github.io/favicon.ico?v=1609158361084">
 <link rel="stylesheet" href="https://taocesc.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ class Solution{
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://taocesc.github.io">
-        <img src="https://taocesc.github.io/images/avatar.png?v=1608772575279" class="site-logo">
+        <img src="https://taocesc.github.io/images/avatar.png?v=1609158361084" class="site-logo">
         <h1 class="site-title">Tao的博客</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -135,7 +135,7 @@ class Solution{
 <h2 id="解题思路-2">解题思路</h2>
 <p>从前往后读字符串，如果在前的字符大于或等于在后的字符，则相加，如果在前的字符小于在后的字符，则减去较小的字符。</p>
 <h2 id="代码-2">代码</h2>
-<pre><code>	java import java.util.*;
+<pre><code class="language-java">	java import java.util.*;
 	class Solution {
 
     public int romanToInt(String s) {
@@ -178,7 +178,105 @@ class Solution{
 <li>左括号必须以正确的顺序闭合。</li>
 </ul>
 <h2 id="解题思路-3">解题思路</h2>
+<p>利用栈求解，如果是左括号就入栈，如果是右括号，则判断是否与栈顶的左括号匹配<br>
+边界条件：<br>
+-- 1.如果碰到右括号而栈为空，则直接返回。<br>
+-- 2.如果右括号全部匹配完毕而栈还不为空，则直接返回。</p>
 <h2 id="代码-3">代码</h2>
+<pre><code class="language-java">class Solution{
+    public boolean isValid(String s){
+        LinkedList&lt;Character&gt; list = new LinkedList&lt;&gt;();
+        char[] chars = s.toCharArray();
+        for (int i = 0;i&lt;chars.length;i++){
+            char c = chars[i];
+            if(isLeft(c)){
+                //左括号，入栈
+                list.push(c);
+            }
+            else{
+                //右括号，上一个左括号与之不匹配，不用再判断，直接返回
+                if(list.isEmpty()||!isMatch(list.pop(),c)){
+                    return false;
+                }
+            }
+        }
+        return list.isEmpty();
+    }
+    private boolean isLeft(char c){
+        if (c =='(')
+        return true;
+        else if (c=='[')
+        return true;
+        else if(c=='{')
+        return true;
+        else
+        return false;
+    }
+    private boolean isMatch(char a ,char b){
+        switch(a){
+            case '(':
+            return b ==')';
+            case '[':
+                return b == ']';
+            case '{':
+                return b == '}';
+            default:
+                return false;
+        }
+    }
+}
+</code></pre>
+<h2 id="21合并两个有序链表">21.合并两个有序链表</h2>
+<h2 id="题目大意-4">题目大意</h2>
+<p>将两个升序链表合并为一个新的<strong>升序</strong>链表并返回。<br>
+实例：</p>
+<pre><code>输入：1-&gt;2-&gt;4,1-&gt;3-&gt;4
+输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</code></pre>
+<h2 id="解题思路-4">解题思路</h2>
+<p>递归思想，如果第一个链表的最小值小于第二个链表的最小值，则对第一个链表该值后面的链表和第二个链表做递归，反之亦然。<br>
+<strong>终止条件：</strong> 如果第一个链表为空，则返回第二个链表，反之亦然。</p>
+<h2 id="代码-4">代码</h2>
+<pre><code class="language-java">class Solution{
+    public ListNode mergeTwoLists(ListNode l1,ListNode l2){
+        if (l1 == null){
+            return l2;
+        }
+        if (l2 == null){
+            return l1;
+        }
+        else if (l1.val &lt; l2.val){
+            l1.next = mergeTwoLists(l1.next,l2);
+            return l1;
+        }
+        else{
+            l2.next = mergeTwoLists(l1,l2.next);
+            return l2;
+        }
+    }
+}
+</code></pre>
+<h2 id="26删除排序数组中的重复项">26.删除排序数组中的重复项</h2>
+<h2 id="题目大意-5">题目大意</h2>
+<p>给定一个排序数组，你需要在<em>原地</em>删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。<br>
+<font color=#999AAA >必须在原地<strong>修改输入数据</strong>并在使用O(1)额外空间的条件下完成。</p>
+<h2 id="解题思路-5">解题思路</h2>
+<p>双指针，如果[j] 与[i] 不相等，则i往后移，并给nums[i] 赋值为nums[j]，直到 <code>j</code> 遍历完毕。</p>
+<h2 id="代码-5">代码</h2>
+<pre><code class="language-java">class Solution {
+    public int removeDuplicates(int[] nums) {
+    if (nums.length == 0) return 0;
+    int i = 0;
+    for (int j = 1; j &lt; nums.length; j++) {
+        if (nums[j] != nums[i]) {
+            i++;
+            nums[i] = nums[j];
+        }
+    }
+    return i + 1;
+}
+}
+</code></pre>
 
             </div>
             
