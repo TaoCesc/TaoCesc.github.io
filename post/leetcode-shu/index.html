@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Leetcode 树 | Tao的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://taocesc.github.io/favicon.ico?v=1610546522086">
+<link rel="stylesheet" href="https://taocesc.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+剑指Offer 55 二叉树的深度
+
+题目大意
+解题思路
+
+
+100.相同的二叉树
+
+递归
+
+
+101.对称二叉树
+
+
+剑指Offer 55 二叉树的深度
+题目大意
+输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://taocesc.github.io">
+        <img src="https://taocesc.github.io/images/avatar.png?v=1610546522086" class="site-logo">
+        <h1 class="site-title">Tao的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://taocesc.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Leetcode 树</h2>
+            <div class="post-date">2021-01-05</div>
+            
+            <div class="post-content" v-pre>
+              <p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%91%E6%8C%87offer-55-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6">剑指Offer 55 二叉树的深度</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F">题目大意</a></li>
+<li><a href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF">解题思路</a></li>
+</ul>
+</li>
+<li><a href="#100%E7%9B%B8%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91">100.相同的二叉树</a>
+<ul>
+<li><a href="#%E9%80%92%E5%BD%92">递归</a></li>
+</ul>
+</li>
+<li><a href="#101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91">101.对称二叉树</a></li>
+</ul>
+</p>
+<h1 id="剑指offer-55-二叉树的深度">剑指Offer 55 二叉树的深度</h1>
+<h2 id="题目大意">题目大意</h2>
+<p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<h2 id="解题思路">解题思路</h2>
+<p><strong>方法一：递归</strong><br>
+如果我们知道了左子树和右子树的最大深度 <code>l</code> 和 <code>r</code>，那么该二叉树的最大深度即为<code>max(l,r)+1</code>。</p>
+<pre><code class="language-java">class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        else
+            return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
+}
+</code></pre>
+<p>方法2：广度优先搜索</p>
+<h1 id="100相同的二叉树">100.相同的二叉树</h1>
+<p>给定两个二叉树，编写一个函数来检验它们是否相同。<br>
+如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<h2 id="递归">递归</h2>
+<pre><code class="language-java">class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null &amp;&amp; q == null)
+            return true;
+        if(p != null &amp;&amp; q != null &amp;&amp; p.val == q.val){
+            return isSameTree(p.left,q.left) &amp;&amp; isSameTree(p.right,q.right);
+        }
+        else{
+            return false;
+        }
+    }
+}
+</code></pre>
+<h1 id="101对称二叉树">101.对称二叉树</h1>
+<p>##解题思路<br>
+<strong>方法一：递归</strong><br>
+如果一个树的左子树与右子树镜像对称，那么这个树是对称的。<br>
+因此，该问题可以转化为：两个树在什么情况下互为镜像？<br>
+如果同时满足下面的条件，两个树互为镜像：</p>
+<ul>
+<li>它们的两个根结点具有相同的值</li>
+<li>每个树的右子树都与另一个树的左子树镜像对称<br>
+我们可以实现这样一个递归函数，通过「同步移动」两个指针的方法来遍历这棵树，<code>p</code>指针和<code>q</code>指针一开始都指向这棵树的根，随后<code>p</code>右移时，<code>q</code>左移，<code>p</code> 左移时，<code>q</code>右移。每次检查当前<code>p</code>和<code>q</code>节点的值是否相等，如果相等再判断左右子树是否对称。</li>
+</ul>
+<pre><code class="language-java">class Solution{
+    public boolean isSymmetirc(TreeNode root){
+        return check(root,root);
+    }
+    public boolean check(TreeNode p,TreeNode q){
+        if(p == null &amp;&amp; q == null){
+            return true;
+        }
+        if(p == null || q == null){
+            return false;
+        }
+        return p.val ==q.val &amp;&amp; check(p.left,q.right)&amp;&amp;check(p.right,q.left);
+    }
+}
+
+
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://taocesc.github.io/post/sui-bi/">
+                  <h3 class="post-title">
+                    随笔
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

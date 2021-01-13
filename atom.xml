@@ -2,14 +2,123 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://taocesc.github.io</id>
     <title>Tao的博客</title>
-    <updated>2020-12-28T13:59:23.556Z</updated>
+    <updated>2021-01-13T14:02:08.021Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://taocesc.github.io"/>
     <link rel="self" href="https://taocesc.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://taocesc.github.io/images/avatar.png</logo>
     <icon>https://taocesc.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Tao的博客</rights>
+    <rights>All rights reserved 2021, Tao的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[金融时序分析入门手册]]></title>
+        <id>https://taocesc.github.io/post/jin-rong-shi-xu-fen-xi-ru-men-shou-ce/</id>
+        <link href="https://taocesc.github.io/post/jin-rong-shi-xu-fen-xi-ru-men-shou-ce/">
+        </link>
+        <updated>2021-01-13T13:50:16.000Z</updated>
+        <content type="html"><![CDATA[<p><font color=#999AAA >       本手册旨在帮助新入学接触金融时序预测的同学快速入门，快速进入科研状态，也可以作为操作指南解决一些问题。<br>
+<font color=#999AAA >本文档可能需要不少时间撰写，随缘更新。<br>
+</font><br>
+</font><br>
+首先，金融时序分析预测及所谓的<strong>股票预测</strong>,在本课题组主要是基于深度学习模型对股价数据进行预测，判断涨跌。所以，显然在科研之前的预备知识上，需要两部分的知识：</p>
+<ul>
+<li>金融领域的专有名词以及股市的相关术语。</li>
+<li>深度学习搭建模型。<br>
+所以手册以这两部分内容为主线，（）<br>
+<ul class="markdownIt-TOC">
+<li><a href="#%E9%87%91%E8%9E%8D%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86">金融背景知识</a></li>
+<li><a href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8">深度学习入门</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="金融背景知识">金融背景知识</h1>
+<h1 id="深度学习入门">深度学习入门</h1>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Leetcode 树]]></title>
+        <id>https://taocesc.github.io/post/leetcode-shu/</id>
+        <link href="https://taocesc.github.io/post/leetcode-shu/">
+        </link>
+        <updated>2021-01-05T10:49:31.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%91%E6%8C%87offer-55-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6">剑指Offer 55 二叉树的深度</a>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F">题目大意</a></li>
+<li><a href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF">解题思路</a></li>
+</ul>
+</li>
+<li><a href="#100%E7%9B%B8%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91">100.相同的二叉树</a>
+<ul>
+<li><a href="#%E9%80%92%E5%BD%92">递归</a></li>
+</ul>
+</li>
+<li><a href="#101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91">101.对称二叉树</a></li>
+</ul>
+</p>
+<h1 id="剑指offer-55-二叉树的深度">剑指Offer 55 二叉树的深度</h1>
+<h2 id="题目大意">题目大意</h2>
+<p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<h2 id="解题思路">解题思路</h2>
+<p><strong>方法一：递归</strong><br>
+如果我们知道了左子树和右子树的最大深度 <code>l</code> 和 <code>r</code>，那么该二叉树的最大深度即为<code>max(l,r)+1</code>。</p>
+<pre><code class="language-java">class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        else
+            return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
+}
+</code></pre>
+<p>方法2：广度优先搜索</p>
+<h1 id="100相同的二叉树">100.相同的二叉树</h1>
+<p>给定两个二叉树，编写一个函数来检验它们是否相同。<br>
+如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<h2 id="递归">递归</h2>
+<pre><code class="language-java">class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null &amp;&amp; q == null)
+            return true;
+        if(p != null &amp;&amp; q != null &amp;&amp; p.val == q.val){
+            return isSameTree(p.left,q.left) &amp;&amp; isSameTree(p.right,q.right);
+        }
+        else{
+            return false;
+        }
+    }
+}
+</code></pre>
+<h1 id="101对称二叉树">101.对称二叉树</h1>
+<p>##解题思路<br>
+<strong>方法一：递归</strong><br>
+如果一个树的左子树与右子树镜像对称，那么这个树是对称的。<br>
+因此，该问题可以转化为：两个树在什么情况下互为镜像？<br>
+如果同时满足下面的条件，两个树互为镜像：</p>
+<ul>
+<li>它们的两个根结点具有相同的值</li>
+<li>每个树的右子树都与另一个树的左子树镜像对称<br>
+我们可以实现这样一个递归函数，通过「同步移动」两个指针的方法来遍历这棵树，<code>p</code>指针和<code>q</code>指针一开始都指向这棵树的根，随后<code>p</code>右移时，<code>q</code>左移，<code>p</code> 左移时，<code>q</code>右移。每次检查当前<code>p</code>和<code>q</code>节点的值是否相等，如果相等再判断左右子树是否对称。</li>
+</ul>
+<pre><code class="language-java">class Solution{
+    public boolean isSymmetirc(TreeNode root){
+        return check(root,root);
+    }
+    public boolean check(TreeNode p,TreeNode q){
+        if(p == null &amp;&amp; q == null){
+            return true;
+        }
+        if(p == null || q == null){
+            return false;
+        }
+        return p.val ==q.val &amp;&amp; check(p.left,q.right)&amp;&amp;check(p.right,q.left);
+    }
+}
+
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[随笔]]></title>
         <id>https://taocesc.github.io/post/sui-bi/</id>
@@ -50,119 +159,6 @@ Java LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器
 <li>需要通过循环迭代来访问列表中的某些元素。</li>
 <li>需要频繁的在列表开头、中间、等位置进行添加和删除元素操作。</li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Tensorflow文档]]></title>
-        <id>https://taocesc.github.io/post/11/</id>
-        <link href="https://taocesc.github.io/post/11/">
-        </link>
-        <updated>2020-12-23T06:01:48.000Z</updated>
-        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
-<li><a href="#1%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-losses">1.损失函数 Losses</a>
-<ul>
-<li><a href="#%E5%8F%AF%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0">可用损失函数</a></li>
-</ul>
-</li>
-<li><a href="#2%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86-metrics">2.评估标准 Metrics</a></li>
-<li><a href="#3%E4%BC%98%E5%8C%96%E5%99%A8optimizers">3.优化器Optimizers</a></li>
-<li><a href="#4%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activations">4.激活函数Activations</a></li>
-</ul>
-</p>
-<h1 id="1损失函数-losses">1.损失函数 Losses</h1>
-<p>损失函数是编译模型时所需的两个参数之一:</p>
-<pre><code class="language-python"> model.compile(loss='mean_squared_error',optimizer='sgd')
-</code></pre>
-<pre><code class="language-python">from keras import losses
-model.compile(loss = losses.mean_squared_error,optimizer='sgd')
-</code></pre>
-<h2 id="可用损失函数">可用损失函数</h2>
-<ul>
-<li><strong>mean_squared_error</strong><pre><code class="language-python">mean_squared_error(y_true,y_pred)
-</code></pre>
-</li>
-<li><strong>mean_absolute_error</strong><pre><code class="language-python">mean_absolute_error(y_true,y_pred)
-</code></pre>
-</li>
-</ul>
-<h1 id="2评估标准-metrics">2.评估标准 Metrics</h1>
-<p>##评价函数的用法<br>
-评价函数用于评估当前训练模型的性能。当模型编译后（compile），评价函数应该作为 <code>metrics</code> 的参数来输入。</p>
-<pre><code class="language-python">model.compile(loss='mean_squared_error',
-              optimizer='sgd',
-              metrics=['mae', 'acc'])
-</code></pre>
-<p>##可使用的评价函数</p>
-<h1 id="3优化器optimizers">3.优化器Optimizers</h1>
-<p>##优化器的用法<br>
-优化器 (optimizer) 是编译 Keras 模型的所需的两个参数之一：</p>
-<pre><code class="language-python">from keras import optimizers
-
-model = Sequential()
-model.add(Dense(64, kernel_initializer='uniform', input_shape=(10,)))
-model.add(Activation('softmax'))
-
-sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='mean_squared_error', optimizer=sgd)
-</code></pre>
-<p>你可以先实例化一个优化器对象，然后将它传入 <code>model.compile()</code>，像上述示例中一样， 或者你可以通过名称来调用优化器。在后一种情况下，将使用优化器的默认参数。</p>
-<pre><code class="language-python"># 传入优化器名称: 默认参数将被采用
-model.compile(loss='mean_squared_error', optimizer='sgd')
-</code></pre>
-<p>##Keras优化器的公共参数<br>
-参数<code>clipnorm</code>和<code>clipvalue</code>能在所有的优化器中使用，用于控制梯度裁剪（Gradient Clipping）：</p>
-<pre><code class="language-python">from keras import optimizers
-
-# 所有参数梯度将被裁剪，让其l2范数最大为1：g * 1 / max(1, l2_norm)
-sgd = optimizers.SGD(lr=0.01, clipnorm=1.)
-</code></pre>
-<p>##SGD</p>
-<pre><code class="language-python">keras.optimizers.SGD(lr=0.01,momentum=0.0,decay=0.0,nesterov=False)
-</code></pre>
-<p>随机梯度下降优化器。<br>
-包含扩展功能的支持： - 动量（momentum）优化, - 学习率衰减（每次参数更新后） - Nestrov 动量 (NAG) 优化<br>
-<strong>参数</strong></p>
-<ul>
-<li><strong>lr</strong>: float &gt;= 0. 学习率。</li>
-<li><strong>momentum</strong>: float &gt;= 0. 参数，用于加速 SGD 在相关方向上前进，并抑制震荡。</li>
-<li><strong>decay: float</strong> &gt;= 0. 每次参数更新后学习率衰减值。</li>
-<li><strong>nesterov: boolean</strong>. 是否使用 Nesterov 动量。<br>
-##RMSprop</li>
-</ul>
-<pre><code class="language-python">keras.optimizers.RMSprop(lr=0.001, rho=0.9, epsilon=None, decay=0.0)
-</code></pre>
-<p>这个优化器通常是训练循环神经网络RNN的不错选择。<br>
-<strong>参数</strong></p>
-<ul>
-<li>lr: float &gt;= 0. 学习率。</li>
-<li>rho: float &gt;= 0. RMSProp梯度平方的移动均值的衰减率.</li>
-<li>epsilon: float &gt;= 0. 模糊因子. 若为 None, 默认为 K.epsilon()。</li>
-<li>decay: float &gt;= 0. 每次参数更新后学习率衰减值。<br>
-##Adam</li>
-</ul>
-<pre><code class="language-python">keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-</code></pre>
-<p><strong>参数</strong></p>
-<ul>
-<li>lr: float &gt;= 0. 学习率。</li>
-<li>beta_1: float, 0 &lt; beta &lt; 1. 通常接近于 1。</li>
-<li>beta_2: float, 0 &lt; beta &lt; 1. 通常接近于 1。</li>
-<li>epsilon: float &gt;= 0. 模糊因子. 若为 None, 默认为 K.epsilon()。</li>
-<li>decay: float &gt;= 0. 每次参数更新后学习率衰减值。</li>
-<li>amsgrad: boolean. 是否应用此算法的 AMSGrad 变种，来自论文 &quot;On the Convergence of Adam and Beyond&quot;。<br>
-##Nadam</li>
-</ul>
-<pre><code class="language-python">keras.optimizers.Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
-</code></pre>
-<p>Nesterov 版本 Adam 优化器。<br>
-正像 Adam 本质上是 RMSProp 与动量 momentum 的结合， Nadam 是采用 Nesterov momentum 版本的 Adam 优化器。<br>
-<strong>参数</strong></p>
-<ul>
-<li>lr: float &gt;= 0. 学习率。</li>
-<li>beta_1/beta_2: floats, 0 &lt; beta &lt; 1. 通常接近于 1。</li>
-<li>epsilon: float &gt;= 0. 模糊因子. 若为 None, 默认为 <code>K.epsilon()</code>。</li>
-</ul>
-<h1 id="4激活函数activations">4.激活函数Activations</h1>
 ]]></content>
     </entry>
     <entry>
@@ -373,7 +369,7 @@ sgd = optimizers.SGD(lr=0.01, clipnorm=1.)
         <id>https://taocesc.github.io/post/linux-pei-zhi-shen-du-xue-xi-huan-jing/</id>
         <link href="https://taocesc.github.io/post/linux-pei-zhi-shen-du-xue-xi-huan-jing/">
         </link>
-        <updated>2020-12-22T02:26:01.000Z</updated>
+        <updated>2020-11-24T02:26:01.000Z</updated>
         <content type="html"><![CDATA[<pre><code>本文用以记录Linux系统配置深度学习环境，及未来会碰到的各种问题。
 </code></pre>
 <h2 id="20201125">2020.11.25</h2>
@@ -422,11 +418,124 @@ import torch
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Tensorflow文档]]></title>
+        <id>https://taocesc.github.io/post/11/</id>
+        <link href="https://taocesc.github.io/post/11/">
+        </link>
+        <updated>2020-11-08T06:01:48.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#1%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-losses">1.损失函数 Losses</a>
+<ul>
+<li><a href="#%E5%8F%AF%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0">可用损失函数</a></li>
+</ul>
+</li>
+<li><a href="#2%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86-metrics">2.评估标准 Metrics</a></li>
+<li><a href="#3%E4%BC%98%E5%8C%96%E5%99%A8optimizers">3.优化器Optimizers</a></li>
+<li><a href="#4%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activations">4.激活函数Activations</a></li>
+</ul>
+</p>
+<h1 id="1损失函数-losses">1.损失函数 Losses</h1>
+<p>损失函数是编译模型时所需的两个参数之一:</p>
+<pre><code class="language-python"> model.compile(loss='mean_squared_error',optimizer='sgd')
+</code></pre>
+<pre><code class="language-python">from keras import losses
+model.compile(loss = losses.mean_squared_error,optimizer='sgd')
+</code></pre>
+<h2 id="可用损失函数">可用损失函数</h2>
+<ul>
+<li><strong>mean_squared_error</strong><pre><code class="language-python">mean_squared_error(y_true,y_pred)
+</code></pre>
+</li>
+<li><strong>mean_absolute_error</strong><pre><code class="language-python">mean_absolute_error(y_true,y_pred)
+</code></pre>
+</li>
+</ul>
+<h1 id="2评估标准-metrics">2.评估标准 Metrics</h1>
+<p>##评价函数的用法<br>
+评价函数用于评估当前训练模型的性能。当模型编译后（compile），评价函数应该作为 <code>metrics</code> 的参数来输入。</p>
+<pre><code class="language-python">model.compile(loss='mean_squared_error',
+              optimizer='sgd',
+              metrics=['mae', 'acc'])
+</code></pre>
+<p>##可使用的评价函数</p>
+<h1 id="3优化器optimizers">3.优化器Optimizers</h1>
+<p>##优化器的用法<br>
+优化器 (optimizer) 是编译 Keras 模型的所需的两个参数之一：</p>
+<pre><code class="language-python">from keras import optimizers
+
+model = Sequential()
+model.add(Dense(64, kernel_initializer='uniform', input_shape=(10,)))
+model.add(Activation('softmax'))
+
+sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='mean_squared_error', optimizer=sgd)
+</code></pre>
+<p>你可以先实例化一个优化器对象，然后将它传入 <code>model.compile()</code>，像上述示例中一样， 或者你可以通过名称来调用优化器。在后一种情况下，将使用优化器的默认参数。</p>
+<pre><code class="language-python"># 传入优化器名称: 默认参数将被采用
+model.compile(loss='mean_squared_error', optimizer='sgd')
+</code></pre>
+<p>##Keras优化器的公共参数<br>
+参数<code>clipnorm</code>和<code>clipvalue</code>能在所有的优化器中使用，用于控制梯度裁剪（Gradient Clipping）：</p>
+<pre><code class="language-python">from keras import optimizers
+
+# 所有参数梯度将被裁剪，让其l2范数最大为1：g * 1 / max(1, l2_norm)
+sgd = optimizers.SGD(lr=0.01, clipnorm=1.)
+</code></pre>
+<p>##SGD</p>
+<pre><code class="language-python">keras.optimizers.SGD(lr=0.01,momentum=0.0,decay=0.0,nesterov=False)
+</code></pre>
+<p>随机梯度下降优化器。<br>
+包含扩展功能的支持： - 动量（momentum）优化, - 学习率衰减（每次参数更新后） - Nestrov 动量 (NAG) 优化<br>
+<strong>参数</strong></p>
+<ul>
+<li><strong>lr</strong>: float &gt;= 0. 学习率。</li>
+<li><strong>momentum</strong>: float &gt;= 0. 参数，用于加速 SGD 在相关方向上前进，并抑制震荡。</li>
+<li><strong>decay: float</strong> &gt;= 0. 每次参数更新后学习率衰减值。</li>
+<li><strong>nesterov: boolean</strong>. 是否使用 Nesterov 动量。<br>
+##RMSprop</li>
+</ul>
+<pre><code class="language-python">keras.optimizers.RMSprop(lr=0.001, rho=0.9, epsilon=None, decay=0.0)
+</code></pre>
+<p>这个优化器通常是训练循环神经网络RNN的不错选择。<br>
+<strong>参数</strong></p>
+<ul>
+<li>lr: float &gt;= 0. 学习率。</li>
+<li>rho: float &gt;= 0. RMSProp梯度平方的移动均值的衰减率.</li>
+<li>epsilon: float &gt;= 0. 模糊因子. 若为 None, 默认为 K.epsilon()。</li>
+<li>decay: float &gt;= 0. 每次参数更新后学习率衰减值。<br>
+##Adam</li>
+</ul>
+<pre><code class="language-python">keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+</code></pre>
+<p><strong>参数</strong></p>
+<ul>
+<li>lr: float &gt;= 0. 学习率。</li>
+<li>beta_1: float, 0 &lt; beta &lt; 1. 通常接近于 1。</li>
+<li>beta_2: float, 0 &lt; beta &lt; 1. 通常接近于 1。</li>
+<li>epsilon: float &gt;= 0. 模糊因子. 若为 None, 默认为 K.epsilon()。</li>
+<li>decay: float &gt;= 0. 每次参数更新后学习率衰减值。</li>
+<li>amsgrad: boolean. 是否应用此算法的 AMSGrad 变种，来自论文 &quot;On the Convergence of Adam and Beyond&quot;。<br>
+##Nadam</li>
+</ul>
+<pre><code class="language-python">keras.optimizers.Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
+</code></pre>
+<p>Nesterov 版本 Adam 优化器。<br>
+正像 Adam 本质上是 RMSProp 与动量 momentum 的结合， Nadam 是采用 Nesterov momentum 版本的 Adam 优化器。<br>
+<strong>参数</strong></p>
+<ul>
+<li>lr: float &gt;= 0. 学习率。</li>
+<li>beta_1/beta_2: floats, 0 &lt; beta &lt; 1. 通常接近于 1。</li>
+<li>epsilon: float &gt;= 0. 模糊因子. 若为 None, 默认为 <code>K.epsilon()</code>。</li>
+</ul>
+<h1 id="4激活函数activations">4.激活函数Activations</h1>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[ARIMA进行时间序列预测-python实现]]></title>
         <id>https://taocesc.github.io/post/arima-jin-xing-shi-jian-xu-lie-yu-ce-python-shi-xian/</id>
         <link href="https://taocesc.github.io/post/arima-jin-xing-shi-jian-xu-lie-yu-ce-python-shi-xian/">
         </link>
-        <updated>2020-12-22T02:25:11.000Z</updated>
+        <updated>2020-09-30T02:25:11.000Z</updated>
         <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
 <li><a href="#%E7%94%A8arima%E8%BF%9B%E8%A1%8C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B">用ARIMA进行时间序列预测</a>
 <ul>
