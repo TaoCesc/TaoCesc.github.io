@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://taocesc.github.io</id>
     <title>Tao的博客</title>
-    <updated>2021-01-13T14:02:08.021Z</updated>
+    <updated>2021-06-10T03:12:59.892Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://taocesc.github.io"/>
     <link rel="self" href="https://taocesc.github.io/atom.xml"/>
@@ -10,6 +10,64 @@
     <logo>https://taocesc.github.io/images/avatar.png</logo>
     <icon>https://taocesc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Tao的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[排序算法总结]]></title>
+        <id>https://taocesc.github.io/post/pai-xu-suan-fa-zong-jie/</id>
+        <link href="https://taocesc.github.io/post/pai-xu-suan-fa-zong-jie/">
+        </link>
+        <updated>2021-06-10T02:32:52.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="选择排序">选择排序</h1>
+<h2 id="思路">思路：</h2>
+<p>每一轮选取未排序的部分中的<strong>最小</strong>的部分交换到未排序部分的最前面.</p>
+<pre><code class="language-java">    class Solution {
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        for(int i = 0;i&lt;len-1;i++){
+            int minIndex = i;
+            for(int j = i+1;j&lt;len;j++){
+                if(nums[j] &lt; nums[minIndex]){
+                    minIndex = j;
+                }
+            }
+            swap(nums,i,minIndex);
+        }
+        return nums;
+    }
+
+    private void swap(int[] nums,int index1,int index2){
+        int temp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = temp;
+    }
+}
+</code></pre>
+<h2 id="复杂度分析">复杂度分析:</h2>
+<p>时间复杂度: O(N²)<br>
+空间复杂度: O(1)</p>
+<h1 id="插入排序">插入排序</h1>
+<h2 id="思路-2">思路</h2>
+<p>每次将一个数字插入到一个有序的数组里,成为一个长度更长的有序数组.</p>
+<pre><code class="language-java">class Solution {
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        for(int i = 1;i&lt;len;i++){
+            int temp = nums[i];
+            int j = i;
+            while(j&gt;0&amp;&amp; nums[j-1]&gt;temp){
+                nums[j] = nums[j-1];
+                j--;
+            }
+            nums[j] = temp;
+        }
+        return nums;
+    }
+}
+</code></pre>
+<h2 id="复杂度分析-2">复杂度分析:</h2>
+<p>时间复杂度: O(N²)<br>
+空间复杂度: O(1)</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[金融时序分析入门手册]]></title>
         <id>https://taocesc.github.io/post/jin-rong-shi-xu-fen-xi-ru-men-shou-ce/</id>
@@ -33,132 +91,6 @@
 </ul>
 <h1 id="金融背景知识">金融背景知识</h1>
 <h1 id="深度学习入门">深度学习入门</h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Leetcode 树]]></title>
-        <id>https://taocesc.github.io/post/leetcode-shu/</id>
-        <link href="https://taocesc.github.io/post/leetcode-shu/">
-        </link>
-        <updated>2021-01-05T10:49:31.000Z</updated>
-        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
-<li><a href="#%E5%89%91%E6%8C%87offer-55-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6">剑指Offer 55 二叉树的深度</a>
-<ul>
-<li><a href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F">题目大意</a></li>
-<li><a href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF">解题思路</a></li>
-</ul>
-</li>
-<li><a href="#100%E7%9B%B8%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91">100.相同的二叉树</a>
-<ul>
-<li><a href="#%E9%80%92%E5%BD%92">递归</a></li>
-</ul>
-</li>
-<li><a href="#101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91">101.对称二叉树</a></li>
-</ul>
-</p>
-<h1 id="剑指offer-55-二叉树的深度">剑指Offer 55 二叉树的深度</h1>
-<h2 id="题目大意">题目大意</h2>
-<p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p>
-<h2 id="解题思路">解题思路</h2>
-<p><strong>方法一：递归</strong><br>
-如果我们知道了左子树和右子树的最大深度 <code>l</code> 和 <code>r</code>，那么该二叉树的最大深度即为<code>max(l,r)+1</code>。</p>
-<pre><code class="language-java">class Solution {
-    public int maxDepth(TreeNode root) {
-        if(root == null)
-            return 0;
-        else
-            return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
-    }
-}
-</code></pre>
-<p>方法2：广度优先搜索</p>
-<h1 id="100相同的二叉树">100.相同的二叉树</h1>
-<p>给定两个二叉树，编写一个函数来检验它们是否相同。<br>
-如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
-<h2 id="递归">递归</h2>
-<pre><code class="language-java">class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p == null &amp;&amp; q == null)
-            return true;
-        if(p != null &amp;&amp; q != null &amp;&amp; p.val == q.val){
-            return isSameTree(p.left,q.left) &amp;&amp; isSameTree(p.right,q.right);
-        }
-        else{
-            return false;
-        }
-    }
-}
-</code></pre>
-<h1 id="101对称二叉树">101.对称二叉树</h1>
-<p>##解题思路<br>
-<strong>方法一：递归</strong><br>
-如果一个树的左子树与右子树镜像对称，那么这个树是对称的。<br>
-因此，该问题可以转化为：两个树在什么情况下互为镜像？<br>
-如果同时满足下面的条件，两个树互为镜像：</p>
-<ul>
-<li>它们的两个根结点具有相同的值</li>
-<li>每个树的右子树都与另一个树的左子树镜像对称<br>
-我们可以实现这样一个递归函数，通过「同步移动」两个指针的方法来遍历这棵树，<code>p</code>指针和<code>q</code>指针一开始都指向这棵树的根，随后<code>p</code>右移时，<code>q</code>左移，<code>p</code> 左移时，<code>q</code>右移。每次检查当前<code>p</code>和<code>q</code>节点的值是否相等，如果相等再判断左右子树是否对称。</li>
-</ul>
-<pre><code class="language-java">class Solution{
-    public boolean isSymmetirc(TreeNode root){
-        return check(root,root);
-    }
-    public boolean check(TreeNode p,TreeNode q){
-        if(p == null &amp;&amp; q == null){
-            return true;
-        }
-        if(p == null || q == null){
-            return false;
-        }
-        return p.val ==q.val &amp;&amp; check(p.left,q.right)&amp;&amp;check(p.right,q.left);
-    }
-}
-
-
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[随笔]]></title>
-        <id>https://taocesc.github.io/post/sui-bi/</id>
-        <link href="https://taocesc.github.io/post/sui-bi/">
-        </link>
-        <updated>2020-12-23T14:33:13.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="20201223晚">2020.12.23晚</h1>
-<p><strong>Java Stack 类</strong><br>
-boolean empty() 判断栈是否为空</p>
-<p>Object peek()  查看栈顶元素<br>
-Object pop()    移除栈顶元素<br>
-Object push() 把元素压入栈顶部<br>
-int search(Object element) 返回元素在栈中的位置。<br>
-用法：</p>
-<pre><code class="language-java">public void test(int x){
-    Stack&lt;Integer&gt; s1 = new Stack&lt;Integer&gt;();
-    Stack&lt;Integer&gt; s2 = new Stack&lt;Integer&gt;();
-    s1.push(x);
-    s2.push(x);
-    int p1 = s1.peek();
-    int p2 = s2.peek();
-
-}
-</code></pre>
-<p><strong>toCharArray()方法将字符串转换成字符数组。</strong></p>
-<pre><code class="language-java">public char[ ] toCharArray()
-</code></pre>
-<p>链表：Linkedlist<br>
-Java LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器。<br>
-与 ArrayList 相比，LinkedList 的<strong>增加和删除</strong>对操作效率更高，而<strong>查找和修改</strong>的操作效率较低。</p>
-<p><strong>以下情况使用ArrayList：</strong></p>
-<ul>
-<li>频繁访问列表中的某一个元素</li>
-<li>只需要在列表末尾进行添加和删除元素操作。</li>
-</ul>
-<p><strong>以下情况使用LinkedList:</strong></p>
-<ul>
-<li>需要通过循环迭代来访问列表中的某些元素。</li>
-<li>需要频繁的在列表开头、中间、等位置进行添加和删除元素操作。</li>
-</ul>
 ]]></content>
     </entry>
     <entry>
@@ -191,137 +123,41 @@ Java LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器
         <updated>2020-12-22T02:26:28.000Z</updated>
         <content type="html"><![CDATA[<h1 id="leetcode题解">LeetCode题解</h1>
 <h2 id=""></h2>
-<h2 id="9回文数">9.回文数</h2>
+<h2 id="1两数之和">1.两数之和</h2>
 <h2 id="题目大意">题目大意</h2>
-<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p>给定一个整数数组nums和一个整数目标值 target，请你在该数组中找出和为目标值 target 的两个整数</p>
 <h2 id="解题思路">解题思路</h2>
-<p>反转一半的数字。</p>
+<p>用HashMap存储。</p>
 <h2 id="代码">代码</h2>
-<pre><code class="language-java">class Solution{
-
-    public boolean isPalindrome(int x){
-		#如果小于0，或者末尾为0，则直接返回false
-        if(x&lt;0||(x%10 == 0 &amp;&amp;x!=0)){
-            return false;
-        }
-        int revertedNumber = 0;
-		#当原始x小于或等于反转后的数字时，说明已经到中间循环结束。
-        while(x&gt;revertedNumber){
-            revertedNumber = revertedNumber *10 + x%10;
-            x /= 10;
-        }
-        return x == revertedNumber ||x==revertedNumber/10;
-    }
-}
-</code></pre>
-<h2 id="13罗马数字转整数">13.罗马数字转整数</h2>
-<h2 id="题目大意-2">题目大意</h2>
-<p>给定一个罗马数字，将其转换成整数。</p>
-<h2 id="解题思路-2">解题思路</h2>
-<p>从前往后读字符串，如果在前的字符大于或等于在后的字符，则相加，如果在前的字符小于在后的字符，则减去较小的字符。</p>
-<h2 id="代码-2">代码</h2>
-<pre><code class="language-java">	java import java.util.*;
-	class Solution {
-
-    public int romanToInt(String s) {
-        int sum = 0;
-        int preNum = getValue(s.charAt(0));
-        for(int i = 1;i &lt; s.length(); i ++) {
-            int num = getValue(s.charAt(i));
-            if(preNum &lt; num) {
-                sum -= preNum;
-            } else {
-                sum += preNum;
-            }
-            preNum = num;
-        }
-        sum += preNum;
-        return sum;
-    }
-    
-    private int getValue(char ch) {
-        switch(ch) {
-            case 'I': return 1;
-            case 'V': return 5;
-            case 'X': return 10;
-            case 'L': return 50;
-            case 'C': return 100;
-            case 'D': return 500;
-            case 'M': return 1000;
-            default: return 0;
-        }
-    }
-}
-
-
-</code></pre>
-<h2 id="20有效的括号">20.有效的括号</h2>
-<h2 id="题目大意-3">题目大意</h2>
-<p>给定一个只包括括号的字符串，判断字符串是否有效。</p>
-<ul>
-<li>左括号必须用相同类型的右括号闭合。</li>
-<li>左括号必须以正确的顺序闭合。</li>
-</ul>
-<h2 id="解题思路-3">解题思路</h2>
-<p>利用栈求解，如果是左括号就入栈，如果是右括号，则判断是否与栈顶的左括号匹配<br>
-边界条件：<br>
--- 1.如果碰到右括号而栈为空，则直接返回。<br>
--- 2.如果右括号全部匹配完毕而栈还不为空，则直接返回。</p>
-<h2 id="代码-3">代码</h2>
-<pre><code class="language-java">class Solution{
-    public boolean isValid(String s){
-        LinkedList&lt;Character&gt; list = new LinkedList&lt;&gt;();
-        char[] chars = s.toCharArray();
-        for (int i = 0;i&lt;chars.length;i++){
-            char c = chars[i];
-            if(isLeft(c)){
-                //左括号，入栈
-                list.push(c);
+<pre><code class="language-java">class Solution {
+    public int maxArea(int[] height) {
+        int left = 0,right = height.length-1;
+        int max = 0;
+        while(left &lt; right){
+            int cur = (right - left)*Math.min(height[right],height[left]);
+            max = Math.max(cur,max);
+            if(height[left] &gt; height[right]){
+                right --;
             }
             else{
-                //右括号，上一个左括号与之不匹配，不用再判断，直接返回
-                if(list.isEmpty()||!isMatch(list.pop(),c)){
-                    return false;
-                }
+                left++;
             }
         }
-        return list.isEmpty();
-    }
-    private boolean isLeft(char c){
-        if (c =='(')
-        return true;
-        else if (c=='[')
-        return true;
-        else if(c=='{')
-        return true;
-        else
-        return false;
-    }
-    private boolean isMatch(char a ,char b){
-        switch(a){
-            case '(':
-            return b ==')';
-            case '[':
-                return b == ']';
-            case '{':
-                return b == '}';
-            default:
-                return false;
-        }
+        return max;
     }
 }
 </code></pre>
 <h2 id="21合并两个有序链表">21.合并两个有序链表</h2>
-<h2 id="题目大意-4">题目大意</h2>
+<h2 id="题目大意-2">题目大意</h2>
 <p>将两个升序链表合并为一个新的<strong>升序</strong>链表并返回。<br>
 实例：</p>
 <pre><code>输入：1-&gt;2-&gt;4,1-&gt;3-&gt;4
 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 </code></pre>
-<h2 id="解题思路-4">解题思路</h2>
+<h2 id="解题思路-2">解题思路</h2>
 <p>递归思想，如果第一个链表的最小值小于第二个链表的最小值，则对第一个链表该值后面的链表和第二个链表做递归，反之亦然。<br>
 <strong>终止条件：</strong> 如果第一个链表为空，则返回第二个链表，反之亦然。</p>
-<h2 id="代码-4">代码</h2>
+<h2 id="代码-2">代码</h2>
 <pre><code class="language-java">class Solution{
     public ListNode mergeTwoLists(ListNode l1,ListNode l2){
         if (l1 == null){
@@ -342,12 +178,12 @@ Java LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器
 }
 </code></pre>
 <h2 id="26删除排序数组中的重复项">26.删除排序数组中的重复项</h2>
-<h2 id="题目大意-5">题目大意</h2>
+<h2 id="题目大意-3">题目大意</h2>
 <p>给定一个排序数组，你需要在<em>原地</em>删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。<br>
 <font color=#999AAA >必须在原地<strong>修改输入数据</strong>并在使用O(1)额外空间的条件下完成。</p>
-<h2 id="解题思路-5">解题思路</h2>
+<h2 id="解题思路-3">解题思路</h2>
 <p>双指针，如果[j] 与[i] 不相等，则i往后移，并给nums[i] 赋值为nums[j]，直到 <code>j</code> 遍历完毕。</p>
-<h2 id="代码-5">代码</h2>
+<h2 id="代码-3">代码</h2>
 <pre><code class="language-java">class Solution {
     public int removeDuplicates(int[] nums) {
     if (nums.length == 0) return 0;
